@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import { matches } from "../data/matches.js";
-import { broadcast, registerClient, removeClient } from "../services/matchService.js";
+import { broadcast, registerClient, registerGlobalClient, removeClient, removeGlobalClient } from "../services/matchService.js";
 
 /** Get all matches */
 export function getMatches(req: Request, res: Response) {
@@ -17,13 +17,60 @@ export function subscribeToMatch(req: Request, res: Response) {
     Connection: "keep-alive",
   });
 
+  // Ensure headers are flushed for some proxies
+  if (typeof (res as any).flushHeaders === 'function') {
+    (res as any).flushHeaders();
+  }
+
   // Register client
   registerClient(matchId, res);
 
-  // Initial message
-  res.write(`data: ${JSON.stringify({ message: "connected" })}\n\n`);
+  // Send initial state of the match immediately so clients have current score
+  const match = matches.find(m => m.id === matchId);
+  if (match) {
+    res.write(`data: ${JSON.stringify(match)}\n\n`);
+  } else {
+    res.write(`data: ${JSON.stringify({ error: "Match not found" })}\n\n`);
+  }
 
-  req.on("close", () => removeClient(matchId, res));
+  // Heartbeat to keep connection alive (every 30s)
+  const heartbeat = setInterval(() => {
+    res.write(`: heartbeat\n\n`); // comment line per SSE spec
+  }, 30000);
+
+  req.on("close", () => {
+    clearInterval(heartbeat);
+    removeClient(matchId, res);
+  });
+}
+
+/** SSE connection for all match updates (used by list page) */
+export function subscribeToAllMatches(req: Request, res: Response) {
+  res.writeHead(200, {
+    "Content-Type": "text/event-stream",
+    "Cache-Control": "no-cache",
+    Connection: "keep-alive",
+  });
+
+  if (typeof (res as any).flushHeaders === 'function') {
+    (res as any).flushHeaders();
+  }
+
+  // Register global client
+  registerGlobalClient(res);
+
+  // Send initial full matches array
+  res.write(`data: ${JSON.stringify({ type: 'init', matches })}\n\n`);
+
+  // Heartbeat
+  const heartbeat = setInterval(() => {
+    res.write(`: heartbeat\n\n`);
+  }, 30000);
+
+  req.on('close', () => {
+    clearInterval(heartbeat);
+    removeGlobalClient(res);
+  });
 }
 
 /** Admin updates match score */

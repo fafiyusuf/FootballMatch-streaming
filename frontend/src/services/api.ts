@@ -17,3 +17,26 @@ export function openSSE(matchId: number, onMessage: (data: Match) => void) {
 
   return events;
 }
+
+export function openAllMatchesSSE(onInit: (matches: Match[]) => void, onUpdate: (updated: Match) => void) {
+  const events = new EventSource(`${BASE_URL}/matches/events`);
+  events.onmessage = (event) => {
+    const parsed = JSON.parse(event.data);
+    if (parsed.type === 'init' && Array.isArray(parsed.matches)) {
+      onInit(parsed.matches as Match[]);
+    } else if (parsed.id) {
+      onUpdate(parsed as Match);
+    }
+  };
+  return events;
+}
+
+export async function updateMatch(id: number, homeGoals: number, awayGoals: number, scorer: string | null) {
+  const res = await fetch(`${BASE_URL}/matches/update/${id}`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ homeGoals, awayGoals, scorer })
+  });
+  if (!res.ok) throw new Error("Failed to update match");
+  return res.json();
+}

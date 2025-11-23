@@ -3,13 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-
   "scripts": {
     "dev": "nodemon --watch 'src/**/*.ts' --exec node --import 'data:text/javascript,import { register } from \"node:module\"; import { pathToFileURL } from \"node:url\"; register(\"ts-node/esm\", pathToFileURL(\"./\"));' src/server.ts",
     "build": "tsc",
     "start": "node dist/server.js"
   },
-
   "keywords": [],
   "author": "",
   "license": "ISC",
