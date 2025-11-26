@@ -27,8 +27,10 @@ Update match score
 Add goals and scorer names
 
 Instantly broadcast updates to all users watching the match
-<img width="1891" height="1140" alt="image" src="https://github.com/user-attachments/assets/32611f35-2557-48fc-9d6e-9522114af422" />
-<img width="1891" height="1140" alt="image" src="https://github.com/user-attachments/assets/5faa80f6-55cc-45c8-8c52-abcadb2f0cb0" />
+<img width="1892" height="1203" alt="image" src="https://github.com/user-attachments/assets/57232f61-6c96-4ebe-a9af-7a554522e495" />
+
+<img width="1892" height="1203" alt="image" src="https://github.com/user-attachments/assets/6c955b34-5f99-48cc-84a1-13d1a5c6734c" />
+
 
 
 
