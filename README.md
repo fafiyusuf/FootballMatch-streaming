@@ -15,6 +15,10 @@ Open any match to watch live score updates
 See goals and scorers appear instantly
 
 Fully real-time using SSE (no polling, no refresh)
+<img width="1891" height="1140" alt="image" src="https://github.com/user-attachments/assets/4a414423-f752-4cce-96d1-dded788b9de1" />
+
+<img width="1891" height="1140" alt="image" src="https://github.com/user-attachments/assets/97902675-f81e-4da5-bcc3-3c6c2bafaaa7" />
+
 
 🔹 Admin Features
 
@@ -23,6 +27,10 @@ Update match score
 Add goals and scorer names
 
 Instantly broadcast updates to all users watching the match
+<img width="1891" height="1140" alt="image" src="https://github.com/user-attachments/assets/32611f35-2557-48fc-9d6e-9522114af422" />
+<img width="1891" height="1140" alt="image" src="https://github.com/user-attachments/assets/5faa80f6-55cc-45c8-8c52-abcadb2f0cb0" />
+
+
 
 🔹 Technical Features
 
