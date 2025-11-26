@@ -35,8 +35,8 @@ export default function MatchList() {
   }, []);
 
   return (
-    <div style={{ maxWidth: "1000px", margin: "0 auto", padding: "20px" ,background: "#000"}}>
-      <div className="nav-header" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "2px solid #333", paddingBottom: "10px", marginBottom: "20px" }}>
+    <div style={{ background: "#000", minHeight: "100vh" }}>
+      <div className="nav-header" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "2px solid #333", padding: "10px 0", margin: 0 }}>
           <h1 style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
             <FaFutbol />
             <span>Live Football Scores</span>
@@ -55,7 +55,7 @@ export default function MatchList() {
         <p style={{ color: "#888", marginTop: "2rem", textAlign: "center" }}>Loading live matches...</p>
       )}
       
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.5rem" }}>
+  <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.5rem", padding: "0 10px 10px 10px", margin: 0 }}>
         {matches.map((m) => (
           <Link
             key={m.id}

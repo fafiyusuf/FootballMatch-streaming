@@ -60,7 +60,7 @@ export default function AdminMatchUpdate() {
   };
 
   return (
-    <div style={{ maxWidth: "600px", margin: "0 auto", padding: "2rem", background: "#000" }}>
+    <div style={{ margin: "0 auto", padding: "2rem", background: "#000", height: "100vh" }}>
       <div className="nav-header" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "2px solid #333", paddingBottom: "10px", marginBottom: "20px" }}>
         <h2 style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
           <FaTools />
@@ -78,7 +78,10 @@ export default function AdminMatchUpdate() {
         borderRadius: "12px", 
         padding: "2rem",
         boxShadow: "0 4px 15px rgba(0, 0, 0, 0.4)",
-        border: "1px solid #333"
+        border: "1px solid #333",
+        width: "700px",
+        margin: "0 auto",
+        height: "700px"
       }}>
         <h3 style={{ marginTop: 0, marginBottom: "1.5rem", textAlign: "center", color: "#fff" }}>Manage Live Scores</h3>
         

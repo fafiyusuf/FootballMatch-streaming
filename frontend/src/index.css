@@ -3,17 +3,17 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
+  /* Force dark theme colors */
+  color-scheme: dark;
   color: #e0e0e0;
-  background-color: #121212; /* Dark stadium vibe fallback */
+  background-color: #000000; /* Solid black default background */
 
-  /* Football Palette */
-  --primary-green: #2ecc71; /* Highlight color for scores/events */
-  --field-green: #27ae60;   /* Slightly darker green for buttons */
-  --accent-blue: #3498db;   /* Accent color for admin actions */
-  --card-bg: #1e1e1e;       /* Background for component cards */
-  --text-main: #ffffff;     /* Main text color */
-  --text-muted: #aaaaaa;    /* Secondary text color */
+  --primary-green: #2ecc71;
+  --field-green: #27ae60;
+  --accent-blue: #3498db;
+  --card-bg: #1e1e1e;
+  --text-main: #ffffff;
+  --text-muted: #aaaaaa;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -27,10 +27,10 @@ a {
   text-decoration: inherit;
 }
 a:hover {
-  color: var(--field-green);
+  color: #27ae60;
 }
 
-/* FULL-PAGE DARK BACKGROUND */
+/* Make whole page dark and allow root to fill it */
 html,
 body {
   margin: 0;
@@ -38,8 +38,7 @@ body {
   min-width: 320px;
   min-height: 100vh;
   height: 100%;
-  /* Dark stadium-like background: subtle dark green to deep black */
-  background: radial-gradient(circle at center, #1a2a1a 0%, #0d0d0d 100%);
+  background: #000000; /* Ensure full page background is black */
 }
 
 button {
@@ -54,7 +53,6 @@ button {
   cursor: pointer;
   transition: transform 0.1s, background-color 0.25s;
 }
-
 button:hover {
   background-color: var(--field-green);
   transform: scale(1.02);
@@ -65,4 +63,4 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-/* Add light scheme definition here if necessary */
+/* Remove light theme override to keep app consistently dark */
