@@ -5,14 +5,15 @@
 
   color-scheme: light dark;
   color: #e0e0e0;
-  background-color: #121212; /* Dark stadium vibe */
+  background-color: #121212; /* Dark stadium vibe fallback */
 
-  --primary-green: #2ecc71;
-  --field-green: #27ae60;
-  --accent-blue: #3498db;
-  --card-bg: #1e1e1e;
-  --text-main: #ffffff;
-  --text-muted: #aaaaaa;
+  /* Football Palette */
+  --primary-green: #2ecc71; /* Highlight color for scores/events */
+  --field-green: #27ae60;   /* Slightly darker green for buttons */
+  --accent-blue: #3498db;   /* Accent color for admin actions */
+  --card-bg: #1e1e1e;       /* Background for component cards */
+  --text-main: #ffffff;     /* Main text color */
+  --text-muted: #aaaaaa;    /* Secondary text color */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -26,21 +27,19 @@ a {
   text-decoration: inherit;
 }
 a:hover {
-  color: #27ae60;
+  color: var(--field-green);
 }
 
+/* FULL-PAGE DARK BACKGROUND */
+html,
 body {
   margin: 0;
-  display: block; /* Changed from flex center to block for full page layout */
+  padding: 0;
   min-width: 320px;
   min-height: 100vh;
+  height: 100%;
+  /* Dark stadium-like background: subtle dark green to deep black */
   background: radial-gradient(circle at center, #1a2a1a 0%, #0d0d0d 100%);
-}
-
-h1 {
-  font-size: 2.5em;
-  line-height: 1.1;
-  color: var(--text-main);
 }
 
 button {
@@ -55,25 +54,15 @@ button {
   cursor: pointer;
   transition: transform 0.1s, background-color 0.25s;
 }
+
 button:hover {
   background-color: var(--field-green);
   transform: scale(1.02);
 }
-}
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
+/* Add light scheme definition here if necessary */

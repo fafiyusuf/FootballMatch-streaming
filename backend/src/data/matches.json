@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "home": "Arsenal",
+    "away": "Chelsea",
+    "score": "1-0",
+    "scorer": "messi"
+  },
+  {
+    "id": 2,
+    "home": "Liverpool",
+    "away": "Everton",
+    "score": "1-1",
+    "scorer": "pogba"
+  },
+  {
+    "id": 3,
+    "home": "Real Madrid",
+    "away": "Barcelona",
+    "score": "0-0",
+    "scorer": null
+  },
+  {
+    "id": 4,
+    "home": "Students",
+    "away": "Teachers",
+    "score": "1-0",
+    "scorer": null
+  }
+]

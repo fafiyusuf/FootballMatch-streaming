@@ -1,5 +1,6 @@
 import type { Request, Response } from "express";
 import { matches } from "../data/matches.js";
+import { saveMatches } from "../data/matchStore.js";
 import { broadcast, registerClient, registerGlobalClient, removeClient, removeGlobalClient } from "../services/matchService.js";
 
 /** Get all matches */
@@ -87,5 +88,52 @@ export function updateMatch(req: Request, res: Response) {
   // Broadcast update
   broadcast(matchId, match);
 
+  // Persist change
+  saveMatches();
+
   res.json({ message: "Match updated", match });
+}
+
+/** Admin creates a new match */
+export function createMatch(req: Request, res: Response) {
+  const { home, away } = req.body;
+  if (!home || !away) {
+    return res.status(400).json({ message: "Home and away team names are required" });
+  }
+
+  const maxId = matches.reduce((max, m) => (m.id > max ? m.id : max), 0);
+  const newMatch = {
+    id: maxId + 1,
+    home,
+    away,
+    score: "0-0",
+    scorer: null,
+  };
+
+  matches.push(newMatch);
+
+  // Broadcast creation to live clients (treated as update)
+  broadcast(newMatch.id, newMatch);
+
+  // Persist change
+  saveMatches();
+
+  res.status(201).json({ message: "Match created", match: newMatch });
+}
+
+/** Admin deletes a match */
+export function deleteMatch(req: Request, res: Response) {
+  const matchId = Number(req.params.id);
+  const index = matches.findIndex((m) => m.id === matchId);
+  if (index === -1) return res.status(404).json({ message: "Match not found" });
+
+  const [removed] = matches.splice(index, 1);
+
+  // Optionally broadcast deletion; frontends can handle if implemented
+  broadcast(matchId, { ...removed, deleted: true });
+
+  // Persist change
+  saveMatches();
+
+  res.json({ message: "Match deleted", match: removed });
 }

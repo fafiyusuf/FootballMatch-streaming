@@ -1,45 +1,13 @@
 #root {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 2rem;
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0; /* Ensures the index.css background covers the whole screen */
   text-align: center;
+  box-sizing: border-box;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
+/* ... (Existing default CSS for logos, cards, etc.) ... */
 
 /* Football Theme Utilities */
 .match-card {
@@ -108,4 +76,62 @@
   text-transform: uppercase;
   font-size: 0.9rem;
   letter-spacing: 1px;
+}
+
+/* Standard Content Container for MatchList and Admin */
+.content-container {
+    padding: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+/* NEW LAYOUT CLASSES FOR MATCHLIVE.TSX (Sidebar) */
+.match-layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+  align-items: flex-start;
+}
+
+.match-sidebar {
+  width: 300px;
+  min-width: 250px;
+  background: #0d0d0d;
+  border-right: 1px solid #333;
+  padding: 15px;
+  overflow-y: auto;
+  position: sticky; /* Keeps the sidebar fixed */
+  top: 0;
+  height: 100vh;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.match-view-main {
+  flex: 1;
+  padding: 20px;
+}
+
+/* Sidebar Match Card Styling */
+.sidebar-match-card {
+    display: block;
+    text-decoration: none;
+    color: var(--text-main);
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 6px;
+    background: #151515;
+    border: 1px solid #333;
+    transition: background 0.2s;
+}
+.sidebar-match-card:hover {
+    background: var(--card-bg);
+}
+.sidebar-match-card.selected {
+    background: var(--primary-green);
+    color: #000;
+    font-weight: bold;
+    border-color: var(--primary-green);
+}
+.sidebar-match-card.selected div {
+    color: #000 !important;
 }

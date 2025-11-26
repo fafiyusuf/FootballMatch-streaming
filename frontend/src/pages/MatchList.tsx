@@ -1,7 +1,12 @@
 import { useEffect, useRef, useState } from "react";
+import { FaFutbol } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { fetchMatches, openAllMatchesSSE } from "../services/api";
 import { Match } from "../types/Match";
+
+// --- New Global Styles/Classes Assumption (replace with your actual CSS) ---
+// .nav-header: Existing style for header
+// .live-indicator: Existing animated dot
 
 export default function MatchList() {
   const [matches, setMatches] = useState<Match[]>([]);
@@ -30,40 +35,69 @@ export default function MatchList() {
   }, []);
 
   return (
-    <div style={{ maxWidth: "800px", margin: "0 auto" }}>
-      <div className="nav-header">
-        <h1>⚽ Live Matches</h1>
-        <Link to="/admin" className="nav-link">Admin Panel</Link>
+    <div style={{ maxWidth: "1000px", margin: "0 auto", padding: "20px" ,background: "#000"}}>
+      <div className="nav-header" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", borderBottom: "2px solid #333", paddingBottom: "10px", marginBottom: "20px" }}>
+          <h1 style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+            <FaFutbol />
+            <span>Live Football Scores</span>
+          </h1>
+        <Link to="/admin" className="nav-link" style={{ 
+          background: "#1e8449", // A deeper green for Admin button
+          padding: "8px 15px",
+          borderRadius: "6px",
+          textDecoration: "none",
+          fontWeight: "bold",
+          color: "#fff"
+        }}>Admin Panel</Link>
       </div>
 
       {matches.length === 0 && (
-        <p style={{ color: "#888", marginTop: "2rem" }}>Loading matches...</p>
+        <p style={{ color: "#888", marginTop: "2rem", textAlign: "center" }}>Loading live matches...</p>
       )}
       
-      <div style={{ display: "grid", gap: "1rem" }}>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: "1.5rem" }}>
         {matches.map((m) => (
           <Link
             key={m.id}
             to={`/match/${m.id}`}
-            className="match-card"
+            style={{
+              textDecoration: "none",
+              color: "#fff",
+              background: "#1c1c1c", // Dark background for card
+              borderRadius: "12px",
+              padding: "1.5rem",
+              boxShadow: "0 4px 15px rgba(0, 0, 0, 0.4)",
+              transition: "transform 0.2s, box-shadow 0.2s",
+              display: "flex",
+              flexDirection: "column",
+              border: "1px solid #333",
+            }}
+            onMouseOver={(e) => { e.currentTarget.style.transform = 'translateY(-5px)'; e.currentTarget.style.boxShadow = '0 8px 20px rgba(0, 0, 0, 0.6)'; }}
+            onMouseOut={(e) => { e.currentTarget.style.transform = 'translateY(0)'; e.currentTarget.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.4)'; }}
           >
-            <div style={{ display: "flex", alignItems: "center", marginBottom: "0.5rem" }}>
-              <span className="live-indicator"></span>
-              <span style={{ fontSize: "0.8rem", textTransform: "uppercase", letterSpacing: "1px", color: "#888" }}>LIVE</span>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "1rem" }}>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <span className="live-indicator" style={{ 
+                  background: "#e74c3c", 
+                  width: "10px", 
+                  height: "10px", 
+                  borderRadius: "50%", 
+                  marginRight: "5px",
+                  animation: "blink 1.5s infinite" // Assuming you define a blink animation in CSS
+                }}></span>
+                <span style={{ fontSize: "0.8rem", textTransform: "uppercase", letterSpacing: "1px", color: "#e74c3c", fontWeight: "bold" }}>LIVE</span>
+              </div>
+              <span style={{ fontSize: "0.9rem", color: "#aaa" }}>Match ID: {m.id}</span>
             </div>
             
-            <div style={{ display: "flex", justifyContent: "space-between", width: "100%", alignItems: "center", fontSize: "1.2rem", fontWeight: "bold" }}>
-              <span style={{ flex: 1, textAlign: "right" }}>{m.home}</span>
-              <span className="score-badge" style={{ margin: "0 1.5rem" }}>{m.score}</span>
-              <span style={{ flex: 1, textAlign: "left" }}>{m.away}</span>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", fontSize: "1.5rem", fontWeight: "bold", textAlign: "center" }}>
+              <span style={{ flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{m.home}</span>
+              <span style={{ margin: "0 1rem", fontSize: "2rem", color: "#2ecc71" }}>{m.score}</span> {/* Highlight score */}
+              <span style={{ flex: 1, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{m.away}</span>
             </div>
-
-            {m.scorer && (
-              <div style={{ marginTop: "1rem", fontSize: "0.9rem", color: "var(--primary-green)", display: "flex", alignItems: "center", gap: "0.5rem" }}>
-                <span>⚽</span>
-                <span>Last Goal: {m.scorer}</span>
-              </div>
-            )}
+            <div style={{ marginTop: "1rem", borderTop: "1px solid #333", paddingTop: "0.75rem" }}>
+                <p style={{ margin: 0, fontSize: "0.9rem", color: "#888" }}>Tap to view live updates</p>
+            </div>
           </Link>
         ))}
       </div>

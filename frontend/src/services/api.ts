@@ -40,3 +40,21 @@ export async function updateMatch(id: number, homeGoals: number, awayGoals: numb
   if (!res.ok) throw new Error("Failed to update match");
   return res.json();
 }
+
+export async function createMatch(home: string, away: string) {
+  const res = await fetch(`${BASE_URL}/matches`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ home, away }),
+  });
+  if (!res.ok) throw new Error("Failed to create match");
+  return res.json();
+}
+
+export async function deleteMatch(id: number) {
+  const res = await fetch(`${BASE_URL}/matches/${id}`, {
+    method: "DELETE",
+  });
+  if (!res.ok) throw new Error("Failed to delete match");
+  return res.json();
+}
