@@ -15,7 +15,8 @@ Open any match to watch live score updates
 See goals and scorers appear instantly
 
 Fully real-time using SSE (no polling, no refresh)
-<img width="1891" height="1140" alt="image" src="https://github.com/user-attachments/assets/4a414423-f752-4cce-96d1-dded788b9de1" />
+<img width="1892" height="1203" alt="image" src="https://github.com/user-attachments/assets/2b359f91-d2ab-4730-8f5b-8e78da489223" />
+
 
 <img width="1891" height="1140" alt="image" src="https://github.com/user-attachments/assets/97902675-f81e-4da5-bcc3-3c6c2bafaaa7" />
 
