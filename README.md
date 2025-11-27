@@ -1,6 +1,6 @@
 
 Football Match Live Score Streaming (SSE + Express + React)
-
+https://github.com/user-attachments/assets/dfb548e5-7d6d-49dd-828d-1a92064e6882
 
 A real-time football match tracking platform built using Event Streaming (SSE), Express.js, and React + TypeScript.
 The system simulates multiple ongoing football matches and streams live updates (goals, scorers, score changes) to all connected clients instantly — without refreshing the page.
